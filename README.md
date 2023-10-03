@@ -1,5 +1,5 @@
-# CIFAR10 Tensorflow
-This is some implementations of CNN Architecture for cifar10 using Tensorflow and Keras API. The dataset consists of airplanes, dogs, cats, and other objects. We first did preprocessing on the images, then trained a convolutional neural network on all the samples. The images need to be normalized and the labels need to be one-hot encoded.
+# CNN for CIFAR-10 using TF2.0
+This is some implementations of CNN Architecture for CIFAR-10 dataset using Tensorflow and Keras Functional API. The dataset consists of airplanes, dogs, cats, and other objects. We first did preprocessing on the images, then trained a convolutional neural network on all the samples. 
 
 ![cifar10][1]
 
@@ -18,47 +18,39 @@ The row vector (3072) has the exact same number of elements if you calculate 32\
 
 ![con_model.png][4]
 
-The entire model consists of 14 layers in total. In addition to layers below lists what techniques are applied to build the model.
+at first we used strided convolutional layers which resulted in low accuracy of the model. That's why to get better results in the improved version we used Batch Normalization, taking inspiration from VGG networks, by doing multiple strided convolution layers before doing pooling. So the improved model consists of 15 layers in total. In addition to layers below lists what techniques are applied to build the model.
 
-1. Convolution with 64 different filters in size of (3x3)
-2. Max Pooling by 2
-  - ReLU activation function
-  - Batch Normalization
-3. Convolution with 128 different filters in size of (3x3)
-4. Max Pooling by 2
-  - ReLU activation function
-  - Batch Normalization
-5. Convolution with 256 different filters in size of (3x3)
-6. Max Pooling by 2
-  - ReLU activation function
-  - Batch Normalization
-7. Convolution with 512 different filters in size of (3x3)
-8. Max Pooling by 2
-  - ReLU activation function
-  - Batch Normalization
-9. Flattening the 3-D output of the last convolutional operations.
-10. Fully Connected Layer with 128 units
-  - Dropout
-  - Batch Normalization
-11. Fully Connected Layer with 256 units
-  - Dropout
-  - Batch Normalization
-12. Fully Connected Layer with 512 units
-  - Dropout
-  - Batch Normalization
-13. Fully Connected Layer with 1024 units
-  - Dropout
-  - Batch Normalization
-14. Fully Connected Layer with 10 units (number of image classes)
+1. Convolution with 32 different filters in size of (3x3)
+2. Batch Normalization
+3. Convolution with 32 different filters in size of (3x3)
+4. Batch Normalization
+5. Max Pooling by 2
+6. Convolution with 64 different filters in size of (3x3)
+7. Batch Normalization
+8. Convolution with 64 different filters in size of (3x3)
+9. Batch Normalization
+10. Max Pooling by 2
+11. Convolution with 128 different filters in size of (3x3)
+12. Batch Normalization
+13. Convolution with 128 different filters in size of (3x3)
+14. Batch Normalization
+15. Max Pooling by 2
+Then we flatten out the 3D layers and add some dropout layers to reduce overfitting.
 
 the image below decribes how the conceptual convolving operation differs from the tensorflow implementation when you use [Channel x Width x Height] tensor format.
 
 ![convolving][5]
 
 # 6. Training the model
-achieving over 75% accuracy in 10 epochs through 5 batches.
+After doing improving the model, we achieve over 87% accuracy in 50 epochs.
 
 ![training][6]
+
+To take a closer look on how the improved model helped us reduce overfitting we can look on accuracy graphs for before & after changing the model by implementing batch normalization and data augmentation.
+
+![Accuracy Before][7]
+
+![Accuracy after][8]
 
 
 
@@ -69,4 +61,6 @@ achieving over 75% accuracy in 10 epochs through 5 batches.
   [3]: ./media/reshape-transpose.png
   [4]: ./media/conv_model.png
   [5]: ./media/convolving.png
-  [6]: ./media/training.png
+  [6]: ./media/training_improved.jpg
+  [7]: ./media/acc.jpg
+  [8]: ./media/acc_improved.jpg
