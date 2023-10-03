@@ -3,7 +3,6 @@ This is some implementations of CNN Architecture for cifar10 using Tensorflow an
 
 ![cifar10][1]
 
-
 # 2. Understanding the dataset
 The original a batch data is (10000 x 3072) dimensional tensor expressed in numpy array, where the number of columns, (10000), indicates the number of sample data. As stated in the [CIFAR-10/CIFAR-100 dataset](https://www.cs.toronto.edu/~kriz/cifar.html), the row vector, (3072) represents an color image of 32x32 pixels.
 
